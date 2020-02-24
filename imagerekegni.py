@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Feb  4 21:35:13 2020
+Created on Tue Feb  6 21:35:13 2020
 
 @author: sindh
 """
 import boto3
 rek = boto3.client('rekognition')
 key = boto3.client('s3')
-bucketname = '311bostonimages'
+bucketname = 'BUCKET NAME'
 response = key.list_objects_v2(Bucket=bucketname)
 for user in response['Contents']:
         s3key=user['Key']
-        imagerek=rek.detect_labels(
+        imagerekognition=rek.detect_labels(
     Image={
         'S3Object': {
             'Bucket' : bucketname,
@@ -19,5 +19,5 @@ for user in response['Contents']:
             }
                }
             )
-        print(imagerek)
+        print(imagerekognition)
 
